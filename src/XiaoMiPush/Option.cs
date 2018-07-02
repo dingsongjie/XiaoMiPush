@@ -7,5 +7,6 @@ namespace XiaoMiPush
    public class Option
     {
         public  string AppSercet { get; set; }
+        public bool UseSandbox { get; set; }
     }
 }

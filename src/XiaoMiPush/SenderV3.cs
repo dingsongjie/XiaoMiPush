@@ -7,19 +7,23 @@ namespace XiaoMiPush
 {
     public class SenderV3 : IXiaoMiSender
     {
-        const string PUSH_BY_REG_ID_API_URL = "https://api.xmpush.xiaomi.com/v3/message/regid";
-        const string PUSH_TO_ALL_DEVICE_API_URL = "https://api.xmpush.xiaomi.com/v3/message/all";
-        const string PUSH_TO_SINGLE_TOPIC_API_URL = "https://api.xmpush.xiaomi.com/v3/message/topic";
-        const string PUSH_BY_ALIAS_API_URL = "https://api.xmpush.xiaomi.com/v3/message/alias";
+        const string SANDBOX_ENDPOINT = "https://sandbox.xmpush.xiaomi.com/";
+        const string PRODUCTION_ENDPOINT = "https://api.xmpush.xiaomi.com/";
+        readonly string EndPoint;
+        const string PUSH_BY_REG_ID_API_URL = "v3/message/regid";
+        const string PUSH_TO_ALL_DEVICE_API_URL = "v3/message/all";
+        const string PUSH_TO_SINGLE_TOPIC_API_URL = "v3/message/topic";
+        const string PUSH_BY_ALIAS_API_URL = "v3/message/alias";
         //const string PUSH_BY_ACCOUNT_API_URL = "https://api.xmpush.xiaomi.com/v2/message/user_account";
-        const string PUSH_TO_MOTIPLE_TOPIC_API_URL = "https://api.xmpush.xiaomi.com/v3/message/multi_topic";
+        const string PUSH_TO_MOTIPLE_TOPIC_API_URL = "message/multi_topic";
         private readonly DefaultHttpClient _defaultHttpClient;
         private readonly ILogger _logger;
 
-        public SenderV3(DefaultHttpClient defaultHttpClient, AbstractXiaoMiPushLoggerFactory abstractXiaoMiPushLoggerFactory)
+        public SenderV3(DefaultHttpClient defaultHttpClient, AbstractXiaoMiPushLoggerFactory abstractXiaoMiPushLoggerFactory, Option option)
         {
             _defaultHttpClient = defaultHttpClient;
-            _logger = abstractXiaoMiPushLoggerFactory.GetLogger(typeof(SenderV3));
+            _logger = abstractXiaoMiPushLoggerFactory.GetLogger(typeof(SenderV3));;
+            EndPoint = option.UseSandbox ? SANDBOX_ENDPOINT : PRODUCTION_ENDPOINT;          
         }
 
       
@@ -30,7 +34,7 @@ namespace XiaoMiPush
             return await Send(parem =>
              {
                  parem.Add("registration_id", registrationIdStr);
-             }, PUSH_BY_REG_ID_API_URL, message);
+             }, $"{EndPoint}{PUSH_BY_REG_ID_API_URL}", message);
 
         }
         public async Task<bool> SendByAlias(string[] alias, IOSMessage message)
@@ -40,7 +44,7 @@ namespace XiaoMiPush
             return await Send(parem =>
             {
                 parem.Add("alias", aliasStr);
-            }, PUSH_BY_ALIAS_API_URL, message);
+            }, $"{EndPoint}{PUSH_BY_ALIAS_API_URL}", message);
 
         }
         private async Task<bool> Send(Action<Dictionary<string, string>> paremeterAction, string apiUrl, IOSMessage message)
@@ -87,7 +91,7 @@ namespace XiaoMiPush
                 return await Send(parem =>
                 {
                     parem.Add("topic", topics[0]);
-                }, PUSH_BY_ALIAS_API_URL, message);
+                }, $"{EndPoint}{PUSH_TO_SINGLE_TOPIC_API_URL}", message);
             }
             else
             {
@@ -95,7 +99,7 @@ namespace XiaoMiPush
                 return await Send(parem =>
                 {
                     parem.Add("topics", topicsStr);
-                }, PUSH_BY_ALIAS_API_URL, message);
+                }, $"{EndPoint}{PUSH_TO_MOTIPLE_TOPIC_API_URL}", message);
             }                 
         }
     }
