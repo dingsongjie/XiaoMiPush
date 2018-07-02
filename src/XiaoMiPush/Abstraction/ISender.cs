@@ -7,6 +7,8 @@ namespace XiaoMiPush.Abstraction
 {
     public interface IXiaoMiSender
     {
-        Task<bool> Send(string[] registrationIds, IOSMessage message);
+        Task<bool> SendByRegistrationIds(string[] registrationIds, IOSMessage message);
+        Task<bool> SendByAlias(string[] alias, IOSMessage message);
+        Task<bool> SendByTopics(string[] topics, IOSMessage message);
     }
 }

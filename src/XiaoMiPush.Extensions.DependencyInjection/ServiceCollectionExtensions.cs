@@ -8,7 +8,7 @@ namespace XiaoMiPush.Extensions.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddXiaoMiPush(this IServiceCollection services)
+        public static IServiceCollection AddXiaoMiPush(this IServiceCollection services, Option option)
         {
             services.AddSingleton<AbstractXiaoMiPushLoggerFactory, AspnetCoreXiaoMiPushLoggerFactory>();
             services.AddSingleton<DefaultHttpClient>();

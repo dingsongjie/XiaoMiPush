@@ -11,15 +11,15 @@ namespace XiaoMiPush
     {
         private HttpClient _httpClient;
 
-        public DefaultHttpClient(string appSecret)
+        public DefaultHttpClient(Option option)
         {
-            if (string.IsNullOrEmpty(appSecret))
+            if (option==null)
             {
-                throw new ArgumentNullException(nameof(appSecret));
+                throw new ArgumentNullException(nameof(option));
             }
             _httpClient = new HttpClient();
             var authorizationSb = new StringBuilder();
-            authorizationSb.Append("key=").Append(appSecret);
+            authorizationSb.Append("key=").Append(option.AppSercet);
             var authorization = authorizationSb.ToString();
             _httpClient.DefaultRequestHeaders.Authorization = AuthenticationHeaderValue.Parse(authorization);
 
