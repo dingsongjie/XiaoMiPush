@@ -4,13 +4,18 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using XiaoMiPush.Abstraction;
 
 namespace XiaoMiPush
 {
     public class DefaultHttpClient
     {
         private HttpClient _httpClient;
-
+        private IHttpContentStrGenerator _httpContentStrGenerator;
+        public DefaultHttpClient(IHttpContentStrGenerator httpContentStrGenerator)
+        {
+            _httpContentStrGenerator = httpContentStrGenerator;
+        }
         public DefaultHttpClient(Option option)
         {
             if (option==null)
@@ -26,20 +31,10 @@ namespace XiaoMiPush
         }
         public Task<HttpResponseMessage> Post(Dictionary<string, string> dic, string url)
         {
-            StringBuilder sb = new StringBuilder();
-
-            foreach (var item in dic)
-            {
-                sb.Append(item.Key).Append("=").Append(item.Value).Append("&");
-            }
-            if (sb.Length > 0)
-            {
-                sb.Remove(sb.Length - 1, 1);
-            }
-            var contentStr = sb.ToString();
-            HttpContent httpContent = new StringContent(contentStr);
+            var paramesStr = _httpContentStrGenerator.Generate(dic);
+            HttpContent httpContent = new StringContent(paramesStr);
 
             return this._httpClient.PostAsync(url, httpContent);
-        }
+        }    
     }
 }
