@@ -11,14 +11,9 @@ namespace XiaoMiPush
     public class DefaultHttpClient
     {
         private HttpClient _httpClient;
-        private IHttpContentStrGenerator _httpContentStrGenerator;
-        public DefaultHttpClient(IHttpContentStrGenerator httpContentStrGenerator)
+        public DefaultHttpClient( Option option)
         {
-            _httpContentStrGenerator = httpContentStrGenerator;
-        }
-        public DefaultHttpClient(Option option)
-        {
-            if (option==null)
+            if (option == null)
             {
                 throw new ArgumentNullException(nameof(option));
             }
@@ -26,15 +21,17 @@ namespace XiaoMiPush
             var authorizationSb = new StringBuilder();
             authorizationSb.Append("key=").Append(option.AppSercet);
             var authorization = authorizationSb.ToString();
-            _httpClient.DefaultRequestHeaders.Authorization = AuthenticationHeaderValue.Parse(authorization);
+            _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", authorization);
+        }
+        public DefaultHttpClient()
+        {
+
 
         }
         public Task<HttpResponseMessage> Post(Dictionary<string, string> dic, string url)
         {
-            var paramesStr = _httpContentStrGenerator.Generate(dic);
-            HttpContent httpContent = new StringContent(paramesStr);
-
-            return this._httpClient.PostAsync(url, httpContent);
-        }    
+            var formContent = new FormUrlEncodedContent(dic);
+            return this._httpClient.PostAsync(url, formContent);
+        }
     }
 }

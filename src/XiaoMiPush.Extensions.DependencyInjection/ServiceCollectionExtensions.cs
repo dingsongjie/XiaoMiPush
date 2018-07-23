@@ -10,7 +10,6 @@ namespace XiaoMiPush.Extensions.DependencyInjection
     {
         public static IServiceCollection AddXiaoMiPush(this IServiceCollection services, Option option)
         {
-            services.AddSingleton<IHttpContentStrGenerator, DefaultHttpContentStrGenerator>();
             services.AddSingleton<AbstractXiaoMiPushLoggerFactory, AspnetCoreXiaoMiPushLoggerFactory>();
             services.AddSingleton<DefaultHttpClient>();
             services.AddTransient<IXiaoMiSender, SenderV3>();
