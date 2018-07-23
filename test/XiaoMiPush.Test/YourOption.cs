@@ -8,7 +8,7 @@ namespace XiaoMiPush.Test
     {
         public static Option Default = new Option()
         {
-            AppSercet = "G4OlfZNbJ640YiOtDz2lwg==",
+            AppSercet = "G4OlfZNbJ640Y2lwg==",
             UseSandbox = true
         };
    
