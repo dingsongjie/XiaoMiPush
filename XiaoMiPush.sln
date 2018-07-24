@@ -15,7 +15,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XiaoMiPush.Test", "test\Xia
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{7131A7FB-AA06-49D4-972F-B7BC8B1D66C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleWebApp", "samples\SampleWebApp\SampleWebApp.csproj", "{160BD708-4ED8-40AB-813D-8607B154DBC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleWebApp", "samples\SampleWebApp\SampleWebApp.csproj", "{160BD708-4ED8-40AB-813D-8607B154DBC3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{98AB62E2-E34C-40DB-AC79-36B5932B1A53}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "postmain", "postmain", "{B97AEDFD-34FC-4320-BB84-ACEE189A2A97}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Desktop\XiaoMiPush.postman_collection.json = ..\..\..\Desktop\XiaoMiPush.postman_collection.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +55,7 @@ Global
 		{34B7E478-03C9-4E6A-A92C-C00F675D17E0} = {7BCB2E05-A916-4D93-A788-9F0E1CFDB05E}
 		{6E2D2EAE-CFD6-4820-9980-538E6B976DE4} = {772902F9-854E-4659-8C83-30D4FF78D044}
 		{160BD708-4ED8-40AB-813D-8607B154DBC3} = {7131A7FB-AA06-49D4-972F-B7BC8B1D66C7}
+		{B97AEDFD-34FC-4320-BB84-ACEE189A2A97} = {98AB62E2-E34C-40DB-AC79-36B5932B1A53}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AEB25AD5-36B7-40EE-A07B-F31FEBCCDF9C}
