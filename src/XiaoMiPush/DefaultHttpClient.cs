@@ -11,7 +11,7 @@ namespace XiaoMiPush
     public class DefaultHttpClient
     {
         private HttpClient _httpClient;
-        public DefaultHttpClient( Option option)
+        public DefaultHttpClient( XiaoMiPushOption option)
         {
             if (option == null)
             {

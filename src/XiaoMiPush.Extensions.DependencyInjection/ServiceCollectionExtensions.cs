@@ -8,12 +8,14 @@ namespace XiaoMiPush.Extensions.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddXiaoMiPush(this IServiceCollection services, Option option)
+        public static IServiceCollection AddXiaoMiPush(this IServiceCollection services, Action<XiaoMiPushOption> optionConfig)
         {
             services.AddSingleton<AbstractXiaoMiPushLoggerFactory, AspnetCoreXiaoMiPushLoggerFactory>();
             services.AddSingleton<DefaultHttpClient>();
             services.AddTransient<IXiaoMiSender, SenderV3>();
-
+            XiaoMiPushOption option = new XiaoMiPushOption();
+            optionConfig(option);
+            services.AddSingleton(option);
             return services;
         }
 

@@ -18,7 +18,7 @@ namespace XiaoMiPush
         private readonly DefaultHttpClient _defaultHttpClient;
         private readonly ILogger _logger;
 
-        public SenderV3(DefaultHttpClient defaultHttpClient, AbstractXiaoMiPushLoggerFactory abstractXiaoMiPushLoggerFactory, Option option)
+        public SenderV3(DefaultHttpClient defaultHttpClient, AbstractXiaoMiPushLoggerFactory abstractXiaoMiPushLoggerFactory, XiaoMiPushOption option)
         {
             _defaultHttpClient = defaultHttpClient;
             _logger = abstractXiaoMiPushLoggerFactory.GetLogger(typeof(SenderV3)); ;

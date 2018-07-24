@@ -23,7 +23,7 @@ namespace XiaoMiPush
             Description = description;
 
             TimeToLive = timeToLive;
-            if (ExtraDic != null)
+            if (extraDic != null)
             {
                 ExtraDic = extraDic;
             }

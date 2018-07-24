@@ -4,7 +4,7 @@ using System.Text;
 
 namespace XiaoMiPush
 {
-   public class Option
+   public class XiaoMiPushOption
     {
         public  string AppSercet { get; set; }
         public bool UseSandbox { get; set; }
