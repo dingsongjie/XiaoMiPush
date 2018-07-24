@@ -14,7 +14,7 @@ namespace XiaoMiPush
         const string PUSH_TO_ALL_DEVICE_API_URL = "v3/message/all";
         const string PUSH_TO_SINGLE_TOPIC_API_URL = "v3/message/topic";
         const string PUSH_BY_ALIAS_API_URL = "v3/message/alias";
-        const string PUSH_TO_MOTIPLE_TOPIC_API_URL = "message/multi_topic";
+        const string PUSH_TO_MOTIPLE_TOPIC_API_URL = "v3/message/multi_topic";
         private readonly DefaultHttpClient _defaultHttpClient;
         private readonly ILogger _logger;
 
@@ -91,6 +91,7 @@ namespace XiaoMiPush
                 return await Send(parem =>
                 {
                     parem.Add("topics", topicsStr);
+                    parem.Add("topic_op", "UNION");
                 }, $"{EndPoint}{PUSH_TO_MOTIPLE_TOPIC_API_URL}", message);
             }
         }
